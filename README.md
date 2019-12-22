@@ -10,80 +10,17 @@ This API is a spinoff from our main project. We're developing a writing tool com
 Paul Shen
 Contact pxshen@alumni.stanford.edu
 
-##Output
-```
-{'corrections': [{'end': 18,
-                  'new': 'My name is Peter. ',
-                  'old': 'myy nam is peter. ',
-                  'start': 0},
-                 {'end': 23, 'new': "I'm not", 'old': 'im no', 'start': 18},
-                 {'end': 54,
-                  'new': 'spelling in English. ',
-                  'old': 'speelling in english. ',
-                  'start': 32},
-                 {'end': 66,
-                  'new': 'I will',
-                  'old': "i'm going to",
-                  'start': 54},
-                 {'end': 102,
-                  'new': 'I think that writing requires a',
-                  'old': 'i think writing required a',
-                  'start': 76},
-                 {'end': 133,
-                  'new': 'I guess what I say',
-                  'old': 'guess i say what',
-                  'start': 117}],
- 'input': "myy nam is peter. im no good at speelling in english. i'm going to "
-          'say that i think writing required a lot of skill. guess i say what',
- 'output': "My name is Peter. I'm not good at spelling in English. I will say "
-           'that I think that writing requires a lot of skill. I guess what I '
-           'say',
- 'status': 'success'}
-{'corrections': [{'end': 26,
-                  'new': 'No puedo hablar Inglés',
-                  'old': 'me no puede hablas inglais',
-                  'start': 0}],
- 'input': 'me no puede hablas inglais',
- 'output': 'No puedo hablar Inglés',
- 'status': 'success'}
-{'corrections': [{'end': 24,
-                  'new': 'Je ne aime pas étudier les mathématiques',
-                  'old': 'je aimes pas etude maths',
-                  'start': 0}],
- 'input': 'je aimes pas etude maths',
- 'output': 'Je ne aime pas étudier les mathématiques',
- 'status': 'success'}
-{'corrections': [{'end': 19,
-                  'new': 'أنا لا من أي وقت مضى',
-                  'old': 'لا أَفْعَلُهُ قَطُّ',
-                  'start': 0}],
- 'input': 'لا أَفْعَلُهُ قَطُّ',
- 'output': 'أنا لا من أي وقت مضى',
- 'status': 'success'}
-{'corrections': [{'end': 7, 'new': '我是外国人。', 'old': '我是国外人民。', 'start': 0},
-                 {'end': 15, 'new': '嗯，我说中国话。', 'old': '我的说中文是好。', 'start': 7}],
- 'input': '我是国外人民。我的说中文是好。',
- 'output': '我是外国人。嗯，我说中国话。',
- 'status': 'success'}
-{'corrections': [{'end': 6, 'new': '私は寿司式ダイスキー', 'old': '私すし食大好', 'start': 0}],
- 'input': '私すし食大好',
-Traceback (most recent call last):
- 'output': '私は寿司式ダイスキー',
-  File "C:/Users/Paul/Desktop/gpt2server/writely/test.py", line 60, in <module>
- 'status': 'success'}
- ```
- 
-##Test code
+## Test code
 ```python
-import pprint
+# import pprint
 
 import requests
 
 s = requests.Session()
 
 
-def print(x):
-    pprint.pprint(x)
+# def print(x):
+#     pprint.pprint(x)
 
 
 def correct(text, lang='en'):
@@ -112,4 +49,16 @@ for lang in test_inputs:
     for input in test_inputs[lang]:
         r = correct(input, lang)
         print(r)
+
 ```
+
+## Output
+```
+{'status': 'success', 'output': "My name is Peter. I'm not good at spelling in English. I will say that I think that writing requires a lot of skill. I guess what I say", 'corrections': [{'end': 18, 'start': 0, 'new': 'My name is Peter. ', 'old': 'myy nam is peter. '}, {'end': 23, 'start': 18, 'new': "I'm not", 'old': 'im no'}, {'end': 54, 'start': 32, 'new': 'spelling in English. ', 'old': 'speelling in english. '}, {'end': 66, 'start': 54, 'new': 'I will', 'old': "i'm going to"}, {'end': 102, 'start': 76, 'new': 'I think that writing requires a', 'old': 'i think writing required a'}, {'end': 133, 'start': 117, 'new': 'I guess what I say', 'old': 'guess i say what'}], 'input': "myy nam is peter. im no good at speelling in english. i'm going to say that i think writing required a lot of skill. guess i say what"}
+{'status': 'success', 'output': 'No puedo hablar Inglés', 'corrections': [{'end': 26, 'start': 0, 'new': 'No puedo hablar Inglés', 'old': 'me no puede hablas inglais'}], 'input': 'me no puede hablas inglais'}
+{'status': 'success', 'output': 'Je ne aime pas étudier les mathématiques', 'corrections': [{'end': 24, 'start': 0, 'new': 'Je ne aime pas étudier les mathématiques', 'old': 'je aimes pas etude maths'}], 'input': 'je aimes pas etude maths'}
+{'status': 'success', 'output': 'أنا لا من أي وقت مضى', 'corrections': [{'end': 19, 'start': 0, 'new': 'أنا لا من أي وقت مضى', 'old': 'لا أَفْعَلُهُ قَطُّ'}], 'input': 'لا أَفْعَلُهُ قَطُّ'}
+{'status': 'success', 'output': '我是外国人。嗯，我说中国话。', 'corrections': [{'end': 7, 'start': 0, 'new': '我是外国人。', 'old': '我是国外人民。'}, {'end': 15, 'start': 7, 'new': '嗯，我说中国话。', 'old': '我的说中文是好。'}], 'input': '我是国外人民。我的说中文是好。'}
+{'status': 'success', 'output': '私は寿司式ダイスキー', 'corrections': [{'end': 6, 'start': 0, 'new': '私は寿司式ダイスキー', 'old': '私すし食大好'}], 'input': '私すし食大好'}
+```
+
